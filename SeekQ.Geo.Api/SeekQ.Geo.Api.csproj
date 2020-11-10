@@ -1,0 +1,41 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <DockerComposeProjectPath>../docker-compose.dcproj</DockerComposeProjectPath>
+    <UserSecretsId>b0909d53-2594-4f27-870b-569984176b3a</UserSecretsId>
+  </PropertyGroup>
+  
+  <PropertyGroup Condition=" '$(RunConfiguration)' == 'SelfHost' " />
+  <ItemGroup>
+    <ProjectReference Include="..\..\App.Common\App.Common\App.Common.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Application\" />
+    <Folder Include="Data\" />
+    <Folder Include="Models\" />
+    <Folder Include="Data\EntityConfigurations\" />
+    <Folder Include="Application\State\" />
+    <Folder Include="Application\City\" />
+    <Folder Include="Application\City\Queries\" />
+    <Folder Include="Application\City\ViewModel\" />
+    <Folder Include="Application\State\Queries\" />
+    <Folder Include="Application\State\ViewModel\" />
+    <Folder Include="Application\Profile\Commands\" />
+    <Folder Include="Application\Profile\Queries\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.10.8" />
+    <PackageReference Include="Serilog.AspNetCore" Version="3.4.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="3.1.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.8">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="NetTopologySuite" Version="2.1.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer.NetTopologySuite" Version="3.1.8" />
+  </ItemGroup>
+</Project>

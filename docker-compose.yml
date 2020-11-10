@@ -1,0 +1,17 @@
+version: '3.4'
+
+services:
+  seekq.geo.api:
+    image: ${DOCKER_REGISTRY-}seekqgeo
+    ports:
+      - "32705:80"
+    build:
+      context: .
+      dockerfile: SeekQ.Geo.Api/Dockerfile
+    environment:
+      ASPNETCORE_ConnectionStrings__MSSQL: "Server=seekq.mssql,1433;Database=SeekQ.Geo;User Id=sa;Password=Password123"
+
+networks:
+  default:
+    external:
+      name: SEEKQ_NETWORK
