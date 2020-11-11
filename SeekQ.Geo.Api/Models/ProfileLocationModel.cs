@@ -2,12 +2,12 @@
 {
     using System;
     using App.Common.Repository;
-    using NetTopologySuite.Geometries;
 
     public class ProfileLocationModel : BaseEntity
     {
         public Guid UserId { get; set; }
-        public Point Location { get; set; }
+        public double Latitud { get; set; }
+        public double Longitud { get; set; }
         public string ZipCode { get; set; }
 
         public string CityId { get; set; }
@@ -15,11 +15,12 @@
 
         public ProfileLocationModel() { }
 
-        public ProfileLocationModel(Guid id, Guid userId, Point location, string zipCode, string cityId)
+        public ProfileLocationModel(Guid id, Guid userId, double latitud, double longitud, string zipCode, string cityId)
         {
             Id = id;
             UserId = userId;
-            Location = location;
+            Latitud = latitud;
+            Longitud = longitud;
             ZipCode = zipCode;
             CityId = cityId;
         }

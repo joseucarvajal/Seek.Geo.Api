@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using App.Common.Exceptions;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using SeekQ.Geo.Api.Data;
 using SeekQ.Geo.Api.Models;
@@ -46,8 +47,18 @@ namespace SeekQ.Geo.Api.Application.Profile.Commands
             {
                 try
                 {
-                    ProfileLocationModel profileLocation = new ProfileLocationModel() { UserId = request.UserId };
-                    _geoDbContext.ProfileLocations.Remove(profileLocation);
+                    Guid UserId = request.UserId;
+
+                    var existingProfileLocation = await _geoDbContext.ProfileLocations
+                                                    .AsNoTracking()
+                                                    .SingleOrDefaultAsync(profile => profile.UserId == UserId);
+
+                    if (existingProfileLocation == null)
+                    {
+                        return false;
+                    }
+
+                    _geoDbContext.ProfileLocations.Remove(existingProfileLocation);
                     await _geoDbContext.SaveChangesAsync();
 
                     return true;

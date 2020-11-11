@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using App.Common.Exceptions;
 using FluentValidation;
 using MediatR;
-using NetTopologySuite.Geometries;
+using Microsoft.EntityFrameworkCore;
 using SeekQ.Geo.Api.Data;
 using SeekQ.Geo.Api.Models;
 
@@ -15,7 +15,8 @@ namespace SeekQ.Geo.Api.Application.Profile.Commands
         public class Command : IRequest<ProfileLocationModel>
         {
             public Guid UserId { get; set; }
-            public Point Location { get; set; }
+            public double Latitud { get; set; }
+            public double Longitud { get; set; }
             public string ZipCode { get; set; }
             public string CityId { get; set; }
         }
@@ -44,20 +45,24 @@ namespace SeekQ.Geo.Api.Application.Profile.Commands
             {
                 try
                 {
-                    Guid Id = Guid.NewGuid();
                     Guid UserId = request.UserId;
-                    Point Location = request.Location;
-                    string ZipCode = request.ZipCode;
-                    string CityId = request.CityId;
 
-                    var existingProfileLocation = _geoDbContext.ProfileLocations.Find(new { UserId });
+                    var existingProfileLocation = await _geoDbContext.ProfileLocations
+                                                    .AsNoTracking()
+                                                    .SingleOrDefaultAsync(profile => profile.UserId == UserId);
 
-                    if (existingProfileLocation == null)
+                    if (existingProfileLocation != null)
                     {
                         throw new AppException($"The UserId {UserId} already has a Profile Location");
                     }
 
-                    ProfileLocationModel profileLocation = new ProfileLocationModel(Id, UserId, Location, ZipCode, CityId);
+                    Guid Id = Guid.NewGuid();
+                    double latitud = request.Latitud;
+                    double longitud = request.Longitud;
+                    string ZipCode = request.ZipCode;
+                    string CityId = request.CityId;
+
+                    ProfileLocationModel profileLocation = new ProfileLocationModel(Id, UserId, latitud, longitud, ZipCode, CityId);
                     _geoDbContext.ProfileLocations.Add(profileLocation);
                     await _geoDbContext.SaveChangesAsync();
 

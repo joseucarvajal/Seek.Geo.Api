@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NetTopologySuite.Geometries;
 using SeekQ.Geo.Api.Data;
 
 namespace SeekQ.Geo.Api.Migrations
@@ -50,8 +49,11 @@ namespace SeekQ.Geo.Api.Migrations
                         .HasColumnName("CityId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Point>("Location")
-                        .HasColumnType("geography");
+                    b.Property<double>("Latitud")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitud")
+                        .HasColumnType("float");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");

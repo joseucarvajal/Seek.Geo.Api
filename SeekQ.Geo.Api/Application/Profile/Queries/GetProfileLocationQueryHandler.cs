@@ -45,7 +45,8 @@ namespace SeekQ.Geo.Api.Application.Profile.Queries
                         string sql =
                             @"
                         SELECT  pl.UserId,
-                                pl.Location,
+                                pl.Latitud,
+                                pl.Longitud,
                                 pl.ZipCode,
                                 s.StateId,
                                 s.StateName,
@@ -53,7 +54,7 @@ namespace SeekQ.Geo.Api.Application.Profile.Queries
                                 c.CityName
                         FROM ProfileLocations pl
                             INNER JOIN cities c ON c.CityId = pl.CityId
-                            INNER JOIN states s ON s.StateId = pl.StateId
+                            INNER JOIN states s ON s.StateId = c.StateId
                         WHERE UserId = @UserId";
 
                         var result = await conn.QueryAsync<ProfileLocationViewModel>(sql, new { query.UserId });

@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using App.Common.Exceptions;
 using FluentValidation;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 using NetTopologySuite.Geometries;
 using SeekQ.Geo.Api.Data;
 using SeekQ.Geo.Api.Models;
@@ -15,7 +16,8 @@ namespace SeekQ.Geo.Api.Application.Profile.Commands
         public class Command : IRequest<ProfileLocationModel>
         {
             public Guid UserId { get; set; }
-            public Point Location { get; set; }
+            public double Latitud { get; set; }
+            public double Longitud { get; set; }
             public string ZipCode { get; set; }
             public string CityId { get; set; }
         }
@@ -45,18 +47,23 @@ namespace SeekQ.Geo.Api.Application.Profile.Commands
                 try
                 {
                     Guid UserId = request.UserId;
-                    Point Location = request.Location;
-                    string ZipCode = request.ZipCode;
-                    string CityId = request.CityId;
 
-                    var existingProfileLocation = _geoDbContext.ProfileLocations.Find(new { UserId });
+                    var existingProfileLocation = await _geoDbContext.ProfileLocations
+                                                    .AsNoTracking()
+                                                    .SingleOrDefaultAsync(profile => profile.UserId == UserId);
 
-                    if (existingProfileLocation != null)
+                    if (existingProfileLocation == null)
                     {
                         throw new AppException($"The UserId {UserId} doesn't have a Profile Location");
                     }
 
-                    existingProfileLocation.Location = Location;
+                    double latitud = request.Latitud;
+                    double longitud = request.Longitud;
+                    string ZipCode = request.ZipCode;
+                    string CityId = request.CityId;
+
+                    existingProfileLocation.Latitud = latitud;
+                    existingProfileLocation.Longitud = longitud;
                     existingProfileLocation.ZipCode = ZipCode;
                     existingProfileLocation.CityId = CityId;
 

@@ -88,11 +88,12 @@ namespace SeekQ.Geo.Api
 
                     var id = new Guid("545DE66E-19AC-47D2-57F6-08D8715337D7");
                     var userId = new Guid("545DE66E-19AC-47D2-57F6-08D8715337D9");
-                    var point = new Point(34.050232, -118.249741);
+                    double latitud = 34.050232;
+                    double longitud = -118.249741;
                     var userLocation = context.ProfileLocations.Find(id);
                     if (userLocation == null)
                     {
-                        context.ProfileLocations.Add(new ProfileLocationModel(id, userId, point, "050024", "1840021543"));
+                        context.ProfileLocations.Add(new ProfileLocationModel(id, userId, latitud, longitud, "050024", "1840021543"));
                         context.SaveChanges();
                         Log.Debug("Miami was created");
                     }

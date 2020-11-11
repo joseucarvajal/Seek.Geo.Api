@@ -5,13 +5,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using NetTopologySuite.Geometries;
 using SeekQ.Geo.Api.Data;
 
 namespace SeekQ.Geo.Api.Migrations
 {
     [DbContext(typeof(GeoDbContext))]
-    [Migration("20201110203650_Initial")]
+    [Migration("20201111010342_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -52,8 +51,11 @@ namespace SeekQ.Geo.Api.Migrations
                         .HasColumnName("CityId")
                         .HasColumnType("nvarchar(450)");
 
-                    b.Property<Point>("Location")
-                        .HasColumnType("geography");
+                    b.Property<double>("Latitud")
+                        .HasColumnType("float");
+
+                    b.Property<double>("Longitud")
+                        .HasColumnType("float");
 
                     b.Property<Guid>("UserId")
                         .HasColumnType("uniqueidentifier");

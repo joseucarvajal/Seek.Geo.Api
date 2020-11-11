@@ -1,6 +1,5 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore.Migrations;
-using NetTopologySuite.Geometries;
 
 namespace SeekQ.Geo.Api.Migrations
 {
@@ -46,7 +45,8 @@ namespace SeekQ.Geo.Api.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     UserId = table.Column<Guid>(nullable: false),
-                    Location = table.Column<Point>(nullable: true),
+                    Latitud = table.Column<double>(nullable: false),
+                    Longitud = table.Column<double>(nullable: false),
                     ZipCode = table.Column<string>(nullable: true),
                     CityId = table.Column<string>(nullable: true)
                 },
