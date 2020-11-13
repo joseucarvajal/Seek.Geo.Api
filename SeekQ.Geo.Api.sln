@@ -11,6 +11,10 @@ Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-co
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App.Common", "..\App.Common\App.Common\App.Common.csproj", "{8942AB3D-DDE4-4F16-B9F3-9782889D42A5}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Test", "Test", "{8615FF72-7571-4B24-9AC5-33DA4937790F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SeekQ.Geo.Api.Test", "SeekQ.Geo.Api.Test\SeekQ.Geo.Api.Test.csproj", "{96A56791-95D6-41C6-B41D-BCD5C1E60EE8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,9 +33,14 @@ Global
 		{8942AB3D-DDE4-4F16-B9F3-9782889D42A5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8942AB3D-DDE4-4F16-B9F3-9782889D42A5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8942AB3D-DDE4-4F16-B9F3-9782889D42A5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96A56791-95D6-41C6-B41D-BCD5C1E60EE8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96A56791-95D6-41C6-B41D-BCD5C1E60EE8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96A56791-95D6-41C6-B41D-BCD5C1E60EE8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96A56791-95D6-41C6-B41D-BCD5C1E60EE8}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{C74EE41B-5538-4DC2-A696-CE6B83BF2D13} = {BEEA7360-8E4D-471A-B8B9-F4EA5223C614}
 		{8942AB3D-DDE4-4F16-B9F3-9782889D42A5} = {5C7AC764-99FF-46D3-AD23-F4488AD7A165}
+		{96A56791-95D6-41C6-B41D-BCD5C1E60EE8} = {8615FF72-7571-4B24-9AC5-33DA4937790F}
 	EndGlobalSection
 EndGlobal

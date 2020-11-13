@@ -57,15 +57,10 @@ namespace SeekQ.Geo.Api.Application.Profile.Commands
                         throw new AppException($"The UserId {UserId} doesn't have a Profile Location");
                     }
 
-                    double latitud = request.Latitud;
-                    double longitud = request.Longitud;
-                    string ZipCode = request.ZipCode;
-                    string CityId = request.CityId;
-
-                    existingProfileLocation.Latitud = latitud;
-                    existingProfileLocation.Longitud = longitud;
-                    existingProfileLocation.ZipCode = ZipCode;
-                    existingProfileLocation.CityId = CityId;
+                    existingProfileLocation.Latitud = request.Latitud;
+                    existingProfileLocation.Longitud = request.Longitud;
+                    existingProfileLocation.ZipCode = request.ZipCode;
+                    existingProfileLocation.CityId = request.CityId;
 
                     _geoDbContext.ProfileLocations.Update(existingProfileLocation);
                     await _geoDbContext.SaveChangesAsync();

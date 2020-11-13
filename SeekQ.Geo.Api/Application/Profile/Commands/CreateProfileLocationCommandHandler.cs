@@ -56,13 +56,15 @@ namespace SeekQ.Geo.Api.Application.Profile.Commands
                         throw new AppException($"The UserId {UserId} already has a Profile Location");
                     }
 
-                    Guid Id = Guid.NewGuid();
-                    double latitud = request.Latitud;
-                    double longitud = request.Longitud;
-                    string ZipCode = request.ZipCode;
-                    string CityId = request.CityId;
+                    ProfileLocationModel profileLocation = new ProfileLocationModel
+                    {
+                        UserId = UserId,
+                        Latitud = request.Latitud,
+                        Longitud = request.Longitud,
+                        ZipCode = request.ZipCode,
+                        CityId = request.CityId
+                    };
 
-                    ProfileLocationModel profileLocation = new ProfileLocationModel(Id, UserId, latitud, longitud, ZipCode, CityId);
                     _geoDbContext.ProfileLocations.Add(profileLocation);
                     await _geoDbContext.SaveChangesAsync();
 
